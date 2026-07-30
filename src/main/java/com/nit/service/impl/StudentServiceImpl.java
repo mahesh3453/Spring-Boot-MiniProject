@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nit.dto.StudentRequestDto;
@@ -16,6 +17,7 @@ import com.nit.exception.ResourseNotFoundException;
 import com.nit.repository.StudentRepository;
 import com.nit.service.StudentService;
 
+@Service
 public class StudentServiceImpl implements StudentService{
 	
 	private final StudentRepository studentRepository;

@@ -6,11 +6,12 @@ A robust, enterprise-ready **Spring Boot RESTful application** for managing **St
 
 ## 🚀 Features
 
-- 👨‍🎓 **Student Management**: Register, update, and manage student details.
-- 📚 **Course Management**: Create and structure courses with pricing, duration, and descriptions.
-- 📝 **Enrollment System**: Enroll students into specific courses with date tracking and grade tracking.
-- 🛡️ **Data Validation & Exception Handling**: Centralized exception management with standard response DTOs and validation constraints.
-- 🗄️ **Relational Database Design**: Clean `@OneToMany` and `@ManyToOne` entity mappings with unique constraints for enrollments.
+- 👨‍🎓 **Student Management**: Register, update, search (by email, city, keyword), and list student details.
+- 📚 **Course Management**: Manage course catalogs, duration, description, and pricing structures.
+- 📝 **Enrollment System**: Enroll students into specific courses with validation (prevention of duplicate enrollments), date tracking, and grade tracking.
+- 🛡️ **Improved Data Validation & Global Exception Handling**: Centralized exception management returning structured JSON error details for resource-not-found, illegal arguments, and field-level validation errors.
+- 💾 **Transactional Safety**: Service implementations leverage Spring's declarative `@Transactional` management to guarantee data integrity.
+- 🗄️ **Relational Database Design**: Clean `@OneToMany` and `@ManyToOne` entity mappings with automatic metadata generation (e.g., automated creation timestamp hooks).
 
 ---
 
@@ -32,6 +33,7 @@ SpringBoot_MiniProject-01/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/nit/
+│   │   │   ├── controller/         # REST Controllers (StudentController)
 │   │   │   ├── dto/                # Data Transfer Objects (Requests & Responses)
 │   │   │   ├── entity/             # JPA Entities (Student, Course, Enrollment)
 │   │   │   ├── exception/          # Global Exception Handling & Custom Exceptions
@@ -80,21 +82,36 @@ Using Maven Wrapper:
 
 ---
 
+## 🔌 API Endpoints (Student Management)
+
+The application exposes the following REST endpoints for **Student Management** under `/api/students`:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| **POST** | `/api/students` | Register/Create a new student |
+| **GET** | `/api/students` | Retrieve all students |
+| **GET** | `/api/students/{id}` | Get student by ID |
+| **PUT** | `/api/students/{id}` | Update student details by ID |
+| **DELETE** | `/api/students/{id}` | Delete a student by ID |
+| **GET** | `/api/students/search/email?email=...` | Find student by unique email |
+| **GET** | `/api/students/search/city?city=...` | Find students located in a specific city |
+| **GET** | `/api/students/search/name?keyword=...` | Search students by name matching a keyword |
+| **GET** | `/api/students/page?pageNo=0&pageSize=10` | Retrieve students with pagination and sorting support |
+
+---
+
 ## 🔄 Daily Workflow / Pushing Updates
 
-To push your daily progress to GitHub, execute the following commands in your project directory:
+To push your progress to GitHub, execute the following commands in your project directory:
 
 ```bash
-# 1. Check status of changed files
-git status
-
-# 2. Stage changes
+# 1. Stage changes
 git add .
 
-# 3. Commit with a meaningful message
-git commit -m "feat: updated course management logic"
+# 2. Commit with a meaningful message
+git commit -m "feat: implement Student API endpoints and Enrollment service layer"
 
-# 4. Push updates to GitHub
+# 3. Push updates to GitHub
 git push
 ```
 

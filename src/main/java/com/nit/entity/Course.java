@@ -20,10 +20,10 @@ public class Course {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long courseId;
+	private long id;
 	
 	@Column(nullable = false, unique = true)
-	private String courseTitle;
+	private String title;
 	private String description;
 	
 	@Column(nullable = false)

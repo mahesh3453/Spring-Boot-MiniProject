@@ -23,6 +23,7 @@ public class CourseServiceImpl implements CourseService{
 	}
 	
 	@Override
+	@Transactional
 	public CourseResponseDto createCourse(CourseRequestDto courseRequestDto) {
 		Course course = mapToEntity(courseRequestDto);
 		Course savedCourse = courseRepository.save(course);
@@ -30,6 +31,7 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public CourseResponseDto getCourseById(long id) {
 		Course course = courseRepository.findById(id).orElseThrow(
 				() -> new ResourseNotFoundException("Course not found with Id: "+id));
@@ -37,6 +39,7 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<CourseResponseDto> getAllCourses() {
 		return courseRepository.findAll().stream().
 				map(this::mapToDto).
@@ -44,10 +47,11 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	@Transactional
 	public CourseResponseDto updateCourse(long id, CourseRequestDto courseRequestDto) {
 		Course course = courseRepository.findById(id).orElseThrow(
 				() -> new ResourseNotFoundException("Course not found with Id: "+id));
-		course.setCourseTitle(courseRequestDto.getTitle());
+		course.setTitle(courseRequestDto.getTitle());
 		course.setDescription(courseRequestDto.getDescription());
 		course.setFee(courseRequestDto.getFee());
 		course.setDurationInWeeks(courseRequestDto.getDurationInWeeks());
@@ -57,6 +61,7 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	@Transactional
 	public void deleteCourse(long id) {
 		if(!courseRepository.existsById(id)) {
 			throw new ResourseNotFoundException("Course not found with Id: "+id);
@@ -81,7 +86,7 @@ public class CourseServiceImpl implements CourseService{
 	
 	private Course mapToEntity(CourseRequestDto courseRequestDto) {
 		Course course = new Course();
-		course.setCourseTitle(courseRequestDto.getTitle());
+		course.setTitle(courseRequestDto.getTitle());
 		course.setDescription(courseRequestDto.getDescription());
 		course.setDurationInWeeks(courseRequestDto.getDurationInWeeks());
 		course.setFee(courseRequestDto.getFee());
@@ -93,8 +98,8 @@ public class CourseServiceImpl implements CourseService{
 		dto.setDescription(entity.getDescription());
 		dto.setDurationInWeeks(entity.getDurationInWeeks());
 		dto.setFee(entity.getFee());
-		dto.setTitle(entity.getCourseTitle());
-		dto.setId(entity.getCourseId());
+		dto.setTitle(entity.getTitle());
+		dto.setId(entity.getId());
 		return dto;
 	}
 
