@@ -1,0 +1,149 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'ngx-toastr/toastr';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-primary: #F8FAFC;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --border-color: rgba(226, 232, 240, 0.8);
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --shadow-custom: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  --bg-primary: #0B0F19;
+  --bg-card: rgba(17, 24, 39, 0.75);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --glass-bg: rgba(17, 24, 39, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --shadow-custom: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Components */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-custom);
+  border-radius: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.glass-nav {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Angular Material Overrides */
+.mat-mdc-table {
+  background: transparent !important;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 600 !important;
+  color: var(--text-secondary) !important;
+  border-bottom-color: var(--border-color) !important;
+  font-size: 0.8125rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mat-mdc-cell {
+  color: var(--text-primary) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+.mat-mdc-row:hover {
+  background-color: var(--glass-border) !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-radius: 1.25rem !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* NGX-TOASTR Premium Enterprise Styling */
+.toast-container .ngx-toastr {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 1rem !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  padding: 14px 20px 14px 50px !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.toast-container .ngx-toastr:hover {
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6) !important;
+  transform: translateY(-2px);
+}
+
+.toast-success {
+  background-color: rgba(16, 185, 129, 0.95) !important;
+  color: #FFFFFF !important;
+}
+
+.toast-error {
+  background-color: rgba(225, 29, 72, 0.95) !important;
+  color: #FFFFFF !important;
+}
+
+.toast-info {
+  background-color: rgba(99, 102, 241, 0.95) !important;
+  color: #FFFFFF !important;
+}
+
+.toast-warning {
+  background-color: rgba(245, 158, 11, 0.95) !important;
+  color: #FFFFFF !important;
+}
