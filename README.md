@@ -1,28 +1,38 @@
-# 🎓 Spring Boot Mini Project - Student & Course Enrollment Management
+# 🎓 Full-Stack Student & Course Enrollment Management System
 
-A robust, enterprise-ready **Spring Boot RESTful application** for managing **Students**, **Courses**, and **Enrollments**. Built with **Java 21**, **Spring Data JPA**, **Hibernate**, **MySQL**, and **Lombok**.
-
----
-
-## 🚀 Features
-
-- 👨‍🎓 **Student Management**: Register, update, search (by email, city, keyword), and list student details.
-- 📚 **Course Management**: Manage course catalogs, duration, description, and pricing structures.
-- 📝 **Enrollment System**: Enroll students into specific courses with validation (prevention of duplicate enrollments), date tracking, and grade tracking.
-- 🛡️ **Improved Data Validation & Global Exception Handling**: Centralized exception management returning structured JSON error details for resource-not-found, illegal arguments, and field-level validation errors.
-- 💾 **Transactional Safety**: Service implementations leverage Spring's declarative `@Transactional` management to guarantee data integrity.
-- 🗄️ **Relational Database Design**: Clean `@OneToMany` and `@ManyToOne` entity mappings with automatic metadata generation (e.g., automated creation timestamp hooks).
+A modern, enterprise-ready full-stack application built with a **Spring Boot RESTful Backend** and an **Angular 19 Reactive Dashboard Frontend**. Manage **Students**, **Courses**, and **Enrollments** seamlessly with real-time statistics, advanced search/filtering, interactive analytics, and full dark mode support.
 
 ---
 
-## 🛠️ Tech Stack & Prerequisites
+## 🚀 Key Features
 
+- 👨‍🎓 **Student Management**: Full CRUD operations, search by email/city/name, and server-side paginated data views.
+- 📚 **Course Catalog**: Manage course descriptions, duration, pricing structures, and fee range queries.
+- 📝 **Enrollment System**: Enroll students into courses with validation against duplicate enrollments, date tracking, and cancellation support.
+- 📊 **Interactive Analytics**: Dashboard metrics, enrollment growth charts, and breakdown summaries using **ApexCharts**.
+- 🎨 **Modern Design & UX**: Sleek glassmorphism dashboard UI powered by **Tailwind CSS**, **Lucide Icons**, and **Angular Material**.
+- 🌓 **Dark & Light Mode**: Built-in theme switcher with state persistence.
+- 🛡️ **Robust Validation & Exception Handling**: Centralized Spring `@ControllerAdvice` returning structured error payloads.
+- ⚡ **Auto Data Seeding**: Pre-configured `DataInitializer` seeds test courses and sample student data automatically on start.
+
+---
+
+## 🛠️ Tech Stack
+
+### **Backend Service**
 - **Java**: JDK 21+
 - **Framework**: Spring Boot 3.x / 4.x
 - **Database**: MySQL Server
-- **ORM**: Spring Data JPA / Hibernate
+- **ORM & Persistence**: Spring Data JPA / Hibernate
 - **Build Tool**: Apache Maven
 - **Utilities**: Project Lombok, Spring Validation
+
+### **Frontend Application**
+- **Framework**: Angular 19 (Standalone Components, Reactive Signals)
+- **Styling**: Tailwind CSS & Sass
+- **UI Components**: Angular Material & Lucide Angular
+- **Charts & Toast Notifications**: ApexCharts & ngx-toastr
+- **Build Tool**: Angular CLI / Vite engine
 
 ---
 
@@ -30,35 +40,43 @@ A robust, enterprise-ready **Spring Boot RESTful application** for managing **St
 
 ```text
 SpringBoot_MiniProject-01/
-├── src/
-│   ├── main/
-│   │   ├── java/com/nit/
-│   │   │   ├── controller/         # REST Controllers (StudentController)
-│   │   │   ├── dto/                # Data Transfer Objects (Requests & Responses)
-│   │   │   ├── entity/             # JPA Entities (Student, Course, Enrollment)
-│   │   │   ├── exception/          # Global Exception Handling & Custom Exceptions
-│   │   │   ├── repository/         # Spring Data JPA Repositories
-│   │   │   ├── service/            # Service Layer Interfaces & Implementations
-│   │   │   ├── ServletInitializer.java
-│   │   │   └── SpringBootMiniProject01Application.java
-│   │   └── resources/
-│   │       └── application.properties # Database and App Configuration
-│   └── test/                       # Unit & Integration Tests
-├── pom.xml
+├── backend/                       # Spring Boot REST API Application
+│   ├── src/main/java/com/nit/
+│   │   ├── config/                # Web CORS & Data Seeding Initializers
+│   │   ├── controller/            # REST Controllers (Student, Course, Enrollment)
+│   │   ├── dto/                   # Request & Response Data Transfer Objects
+│   │   ├── entity/                # JPA Database Entities
+│   │   ├── exception/             # Custom Exceptions & Global Exception Handler
+│   │   ├── repository/            # Spring Data Repositories
+│   │   └── service/               # Business Logic Interfaces & Implementations
+│   ├── src/main/resources/
+│   │   └── application.properties # Database Connection & Spring Config
+│   ├── pom.xml                    # Maven Dependencies Configuration
+│   └── mvnw / mvnw.cmd            # Maven Wrapper Executables
+│
+├── frontend/                      # Angular 19 SPA Application
+│   ├── src/app/
+│   │   ├── core/                  # Services, Models, Guards & Interceptors
+│   │   ├── layouts/               # Dashboard Layout & Sidebar Components
+│   │   ├── pages/                 # Dashboard, Students, Courses, Analytics
+│   │   └── shared/                # Reusable UI Elements (Cards, Dialogs, Loaders)
+│   ├── angular.json               # Angular CLI Workspace Config
+│   └── package.json               # Node.js Project Dependencies
+│
 └── README.md
 ```
 
 ---
 
-## ⚙️ Configuration & Setup
+## ⚙️ Quick Start & Setup Guide
 
-### 1. Database Configuration
+### 1. Database Setup
 Create a MySQL database named `springboot_miniproject`:
 ```sql
 CREATE DATABASE springboot_miniproject;
 ```
 
-Update your database credentials in `src/main/resources/application.properties` if needed:
+Update your database credentials in `backend/src/main/resources/application.properties` if needed:
 ```properties
 spring.application.name=SpringBoot_MiniProject-01
 spring.datasource.url=jdbc:mysql://localhost:3306/springboot_miniproject
@@ -69,23 +87,35 @@ spring.jpa.show-sql=true
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-### 2. Build and Run
+### 2. Start Backend Service
+Navigate to the `backend` directory and run using Maven Wrapper:
 
-Using Maven Wrapper:
 ```bash
-# Build the project
-./mvnw clean install
+# Windows
+cd backend
+.\mvnw.cmd spring-boot:run
 
-# Run the application
+# Linux / macOS
+cd backend
 ./mvnw spring-boot:run
 ```
+*Backend runs on:* `http://localhost:8080`
+
+### 3. Start Frontend Application
+Navigate to the `frontend` directory, install dependencies, and launch dev server:
+
+```bash
+cd frontend
+npm install
+npm start
+```
+*Frontend runs on:* `http://localhost:4200`
 
 ---
 
-## 🔌 API Endpoints (Student Management)
+## 🔌 REST API Reference
 
-The application exposes the following REST endpoints for **Student Management** under `/api/students`:
-
+### **Student Endpoints (`/api/students`)**
 | Method | Endpoint | Description |
 |---|---|---|
 | **POST** | `/api/students` | Register/Create a new student |
@@ -94,26 +124,29 @@ The application exposes the following REST endpoints for **Student Management** 
 | **PUT** | `/api/students/{id}` | Update student details by ID |
 | **DELETE** | `/api/students/{id}` | Delete a student by ID |
 | **GET** | `/api/students/search/email?email=...` | Find student by unique email |
-| **GET** | `/api/students/search/city?city=...` | Find students located in a specific city |
-| **GET** | `/api/students/search/name?keyword=...` | Search students by name matching a keyword |
-| **GET** | `/api/students/page?pageNo=0&pageSize=10` | Retrieve students with pagination and sorting support |
+| **GET** | `/api/students/search/city?city=...` | Find students by city |
+| **GET** | `/api/students/search/name?keyword=...` | Search students by name |
+| **GET** | `/api/students/page?pageNo=0&pageSize=10` | Server-side paginated students view |
 
----
+### **Course Endpoints (`/api/courses`)**
+| Method | Endpoint | Description |
+|---|---|---|
+| **POST** | `/api/courses` | Create a new course |
+| **GET** | `/api/courses` | Retrieve all courses |
+| **GET** | `/api/courses/{id}` | Get course by ID |
+| **PUT** | `/api/courses/{id}` | Update course details |
+| **DELETE** | `/api/courses/{id}` | Delete a course by ID |
+| **GET** | `/api/courses/search?title=...` | Search course by title |
+| **GET** | `/api/courses/fee-range?minFee=...&maxFee=...` | Filter courses by price range |
 
-## 🔄 Daily Workflow / Pushing Updates
-
-To push your progress to GitHub, execute the following commands in your project directory:
-
-```bash
-# 1. Stage changes
-git add .
-
-# 2. Commit with a meaningful message
-git commit -m "feat: implement Student API endpoints and Enrollment service layer"
-
-# 3. Push updates to GitHub
-git push
-```
+### **Enrollment Endpoints (`/api/enrollments`)**
+| Method | Endpoint | Description |
+|---|---|---|
+| **POST** | `/api/enrollments` | Enroll a student into a course |
+| **GET** | `/api/enrollments` | List all active enrollments |
+| **DELETE** | `/api/enrollments/{id}` | Cancel an enrollment by ID |
+| **GET** | `/api/enrollments/student/{studentId}/courses` | Fetch courses enrolled by a student |
+| **GET** | `/api/enrollments/course/{courseId}/students` | Fetch students enrolled in a course |
 
 ---
 
