@@ -246,7 +246,7 @@ export class DashboardComponent implements OnInit {
   feeChartOptions: ChartOptions = {
     series: [{ name: 'Courses in Range', data: [0, 0, 0, 0] }],
     chart: { type: 'bar', height: 250, toolbar: { show: false }, zoom: { enabled: false } },
-    xaxis: { categories: ['₹0-₹300', '₹300-₹600', '₹600-₹1000', '₹1000+'] },
+    xaxis: { categories: ['< ₹10,000', '₹10,000 - ₹25,000', '₹25,000 - ₹50,000', '₹50,000+'] },
     colors: ['#10B981'],
     grid: { borderColor: 'rgba(148, 163, 184, 0.1)' }
   };
@@ -294,9 +294,9 @@ export class DashboardComponent implements OnInit {
           let r1 = 0, r2 = 0, r3 = 0, r4 = 0;
           courses.forEach(c => {
             const f = c.fee || 0;
-            if (f <= 300) r1++;
-            else if (f <= 600) r2++;
-            else if (f <= 1000) r3++;
+            if (f < 10000) r1++;
+            else if (f <= 25000) r2++;
+            else if (f <= 50000) r3++;
             else r4++;
           });
 

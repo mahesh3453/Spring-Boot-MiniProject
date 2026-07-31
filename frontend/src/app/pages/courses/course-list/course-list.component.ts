@@ -297,7 +297,7 @@ export class CourseListComponent implements OnInit {
   courseForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
     description: [''],
-    fee: [750, [Validators.required, Validators.min(1)]],
+    fee: [25000, [Validators.required, Validators.min(1)]],
     durationInWeeks: [12, [Validators.required, Validators.min(1)]]
   });
 
@@ -355,7 +355,7 @@ export class CourseListComponent implements OnInit {
     this.courseForm.reset({
       title: '',
       description: '',
-      fee: 750,
+      fee: 25000,
       durationInWeeks: 12
     });
     this.showFormModal.set(true);

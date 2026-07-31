@@ -34,28 +34,28 @@ public class DataInitializer implements CommandLineRunner {
             Course c1 = new Course();
             c1.setTitle("Full Stack Java Spring Boot & Angular");
             c1.setDescription("Master enterprise microservices, Spring Data JPA, Security, REST API architecture and Angular standalone components.");
-            c1.setFee(750.0);
+            c1.setFee(25000.0);
             c1.setDurationInWeeks(12);
             courseRepository.save(c1);
 
             Course c2 = new Course();
             c2.setTitle("Cloud Native Microservices Architecture");
             c2.setDescription("Build resilient distributed systems with Spring Cloud Gateway, Netflix Eureka, Docker & Kubernetes.");
-            c2.setFee(950.0);
+            c2.setFee(45000.0);
             c2.setDurationInWeeks(16);
             courseRepository.save(c2);
 
             Course c3 = new Course();
             c3.setTitle("Data Structures & Algorithms in Java");
             c3.setDescription("Deep dive into memory management, tree structures, dynamic programming, and algorithm optimization.");
-            c3.setFee(500.0);
+            c3.setFee(15000.0);
             c3.setDurationInWeeks(10);
             courseRepository.save(c3);
 
             Course c4 = new Course();
             c4.setTitle("DevOps & CI/CD Pipeline Automation");
             c4.setDescription("Automate build & release workflows using GitHub Actions, Jenkins, Terraform, and AWS Cloud Infrastructure.");
-            c4.setFee(850.0);
+            c4.setFee(35000.0);
             c4.setDurationInWeeks(14);
             courseRepository.save(c4);
         }
