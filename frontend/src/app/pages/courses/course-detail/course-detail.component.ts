@@ -47,7 +47,7 @@ import { EmptyStateComponent } from '../../../shared/components/empty-state/empt
 
             <div class="p-6 rounded-2xl bg-slate-100/70 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center shrink-0">
               <span class="text-xs uppercase font-semibold text-slate-400 block mb-1">Standard Fee</span>
-              <span class="text-3xl font-black text-emerald-500">&#36;{{ course()?.fee }}</span>
+              <span class="text-3xl font-black text-emerald-500">₹{{ course()?.fee }}</span>
               <span class="text-[10px] text-slate-400 block mt-1">Per Enrolled Student</span>
             </div>
           </div>

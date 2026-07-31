@@ -141,7 +141,7 @@ import { Course } from '../../../core/models/course.model';
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500">
                   {{ c.durationInWeeks }} Weeks
                 </span>
-                <span class="text-base font-extrabold text-slate-900 dark:text-white">&#36;{{ c.fee }}</span>
+                <span class="text-base font-extrabold text-slate-900 dark:text-white">₹{{ c.fee }}</span>
               </div>
               <h4 class="text-xs font-bold text-slate-900 dark:text-white mb-1">{{ c.title }}</h4>
               <p class="text-[11px] text-slate-400 line-clamp-2">{{ c.description }}</p>
@@ -189,7 +189,7 @@ import { Course } from '../../../core/models/course.model';
             <div class="text-xs space-y-1">
               <p class="font-extrabold text-sm text-slate-900 dark:text-white">{{ selectedCourse()?.title }}</p>
               <p class="text-slate-400">Duration: {{ selectedCourse()?.durationInWeeks }} Weeks</p>
-              <p class="text-emerald-500 font-extrabold text-base">&#36;{{ selectedCourse()?.fee }} Tuition</p>
+              <p class="text-emerald-500 font-extrabold text-base">₹{{ selectedCourse()?.fee }} Tuition</p>
             </div>
           </div>
 

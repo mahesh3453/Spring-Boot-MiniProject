@@ -262,7 +262,7 @@ interface NotificationItem {
                   <p class="font-bold text-slate-900 dark:text-white">{{ c.title }}</p>
                   <p class="text-[10px] text-slate-400">{{ c.durationInWeeks }} Weeks</p>
                 </div>
-                <span class="font-bold text-emerald-500">\${{ c.fee }}</span>
+                <span class="font-bold text-emerald-500">₹{{ c.fee }}</span>
               </div>
             </div>
 

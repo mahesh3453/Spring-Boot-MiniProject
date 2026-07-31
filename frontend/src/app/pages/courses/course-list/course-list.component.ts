@@ -51,22 +51,35 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
           </app-search-bar>
         </div>
 
-        <!-- Fee Filter Slider -->
-        <div class="flex items-center gap-4 w-full md:w-auto text-xs">
+        <!-- Fee Filter Inputs (Min & Max Fee in ₹) -->
+        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto text-xs">
           <div class="flex items-center gap-2">
-            <span class="text-slate-500">Max Fee: <strong>&#36;{{ maxFeeFilter }}</strong></span>
+            <span class="text-slate-600 dark:text-slate-400 font-medium">Fee (₹):</span>
             <input
-              type="range"
-              min="100"
-              max="2000"
-              step="50"
+              type="number"
+              placeholder="Min Fee ₹"
+              [(ngModel)]="minFeeFilter"
+              (input)="applyFeeFilter()"
+              class="w-24 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-900 dark:text-white"
+            />
+            <span class="text-slate-400 font-bold">-</span>
+            <input
+              type="number"
+              placeholder="Max Fee ₹"
               [(ngModel)]="maxFeeFilter"
               (input)="applyFeeFilter()"
-              class="w-32 accent-brand-500 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer"
+              class="w-24 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-900 dark:text-white"
             />
+            <button
+              *ngIf="minFeeFilter || maxFeeFilter"
+              (click)="clearFeeFilter()"
+              title="Reset Fee Filters"
+              class="px-2.5 py-1.5 bg-slate-200 dark:bg-slate-700 hover:bg-rose-500 hover:text-white rounded-lg text-[11px] font-semibold text-slate-700 dark:text-slate-200 transition-colors">
+              Reset
+            </button>
           </div>
 
-          <div class="h-4 w-px bg-slate-200 dark:bg-slate-700"></div>
+          <div class="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block"></div>
 
           <!-- Grid / List Layout Switcher -->
           <div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
@@ -100,7 +113,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
         <app-empty-state
           icon="📚"
           title="No Courses Found"
-          description="No courses found matching your fee limit or search keywords."
+          description="No courses found matching your fee filter criteria or search keywords."
           actionLabel="Create Course"
           (action)="openCreateModal()">
         </app-empty-state>
@@ -117,7 +130,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
               <span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
                 {{ course.durationInWeeks }} Weeks Duration
               </span>
-              <span class="text-lg font-black text-slate-900 dark:text-white">&#36;{{ course.fee }}</span>
+              <span class="text-lg font-black text-slate-900 dark:text-white">₹{{ course.fee }}</span>
             </div>
 
             <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand-500 transition-colors mb-2">
@@ -163,7 +176,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
               <th class="p-4">ID</th>
               <th class="p-4">Course Title</th>
               <th class="p-4">Duration</th>
-              <th class="p-4">Tuition Fee</th>
+              <th class="p-4">Tuition Fee (₹)</th>
               <th class="p-4 text-right">Actions</th>
             </tr>
           </thead>
@@ -176,7 +189,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
                 </a>
               </td>
               <td class="p-4 text-slate-600 dark:text-slate-300">{{ course.durationInWeeks }} Weeks</td>
-              <td class="p-4 font-bold text-emerald-500">&#36;{{ course.fee }}</td>
+              <td class="p-4 font-bold text-emerald-500">₹{{ course.fee }}</td>
               <td class="p-4 text-right">
                 <button (click)="openEditModal(course)" class="p-1 text-slate-400 hover:text-amber-500 mr-2">✏️</button>
                 <button (click)="confirmDelete(course)" class="p-1 text-slate-400 hover:text-rose-500">🗑️</button>
@@ -221,7 +234,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Tuition Fee ($) *</label>
+                <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Tuition Fee (₹) *</label>
                 <input
                   type="number"
                   formControlName="fee"
@@ -276,7 +289,8 @@ export class CourseListComponent implements OnInit {
 
   viewMode: 'grid' | 'table' = 'grid';
   searchQuery = '';
-  maxFeeFilter = 5000;
+  minFeeFilter: number | null = null;
+  maxFeeFilter: number | null = null;
   isEditMode = false;
   editingCourseId: number | null = null;
 
@@ -313,8 +327,12 @@ export class CourseListComponent implements OnInit {
       result = result.filter(c => c.title.toLowerCase().includes(q));
     }
 
-    if (this.maxFeeFilter) {
-      result = result.filter(c => (c.fee || 0) <= this.maxFeeFilter);
+    if (this.minFeeFilter !== null && this.minFeeFilter !== undefined && this.minFeeFilter > 0) {
+      result = result.filter(c => (c.fee || 0) >= (this.minFeeFilter as number));
+    }
+
+    if (this.maxFeeFilter !== null && this.maxFeeFilter !== undefined && this.maxFeeFilter > 0) {
+      result = result.filter(c => (c.fee || 0) <= (this.maxFeeFilter as number));
     }
 
     return result;
@@ -325,6 +343,11 @@ export class CourseListComponent implements OnInit {
   }
 
   applyFeeFilter(): void {}
+
+  clearFeeFilter(): void {
+    this.minFeeFilter = null;
+    this.maxFeeFilter = null;
+  }
 
   openCreateModal(): void {
     this.isEditMode = false;

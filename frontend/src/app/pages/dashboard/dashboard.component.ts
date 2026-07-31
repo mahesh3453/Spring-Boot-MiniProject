@@ -86,7 +86,7 @@ export type ChartOptions = {
 
         <app-stat-card
           title="Avg. Course Fee"
-          [value]="'$' + avgCourseFee().toFixed(2)"
+          [value]="'₹' + avgCourseFee().toFixed(2)"
           subtitle="Calculated catalog average"
           gradientClass="from-amber-500 to-orange-500"
           iconBgClass="bg-amber-500/10 text-amber-500">
@@ -246,7 +246,7 @@ export class DashboardComponent implements OnInit {
   feeChartOptions: ChartOptions = {
     series: [{ name: 'Courses in Range', data: [0, 0, 0, 0] }],
     chart: { type: 'bar', height: 250, toolbar: { show: false }, zoom: { enabled: false } },
-    xaxis: { categories: ['$0-$300', '$300-$600', '$600-$1000', '$1000+'] },
+    xaxis: { categories: ['₹0-₹300', '₹300-₹600', '₹600-₹1000', '₹1000+'] },
     colors: ['#10B981'],
     grid: { borderColor: 'rgba(148, 163, 184, 0.1)' }
   };

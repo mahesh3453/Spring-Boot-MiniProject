@@ -65,7 +65,7 @@ import { StatCardComponent } from '../../shared/components/stat-card/stat-card.c
         <!-- Revenue & Tuition Velocity -->
         <div class="glass-card p-6 border border-slate-200 dark:border-slate-800">
           <h2 class="text-base font-bold text-slate-900 dark:text-white mb-1">Tuition Revenue Velocity</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Gross tuition value processed ($ USD)</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Gross tuition value processed (₹ INR)</p>
           
           <div class="h-72">
             <apx-chart
@@ -102,7 +102,7 @@ import { StatCardComponent } from '../../shared/components/stat-card/stat-card.c
 })
 export class AnalyticsComponent {
   revenueChart: ChartOptions = {
-    series: [{ name: 'Revenue ($)', data: [15000, 24000, 31000, 48000, 62000, 89000] }],
+    series: [{ name: 'Revenue (₹)', data: [15000, 24000, 31000, 48000, 62000, 89000] }],
     chart: { type: 'line', height: 280, toolbar: { show: false }, zoom: { enabled: false } },
     xaxis: { categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q1 Next', 'Q2 Next'] },
     stroke: { curve: 'smooth', width: 4 },

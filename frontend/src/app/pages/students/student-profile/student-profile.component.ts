@@ -101,7 +101,7 @@ import { EmptyStateComponent } from '../../../shared/components/empty-state/empt
                 <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-brand-500/10 text-brand-500">
                   {{ course.durationInWeeks }} Weeks
                 </span>
-                <span class="text-xs font-extrabold text-slate-900 dark:text-white">&#36;{{ course.fee }}</span>
+                <span class="text-xs font-extrabold text-slate-900 dark:text-white">₹{{ course.fee }}</span>
               </div>
               <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-2">{{ course.title }}</h3>
               <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">{{ course.description }}</p>
